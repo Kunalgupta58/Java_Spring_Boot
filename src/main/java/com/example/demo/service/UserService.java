@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 
+import com.example.demo.Exception.UserNotFoundException;
 import com.example.demo.Repository.UserRepository;
 import com.example.demo.model.User;
 import java.util.Optional;
@@ -39,21 +40,16 @@ public class UserService {
 //            throw new RuntimeException("User not Found");
 //        }
 //    }
-    public User getUserById(Long id) {
+//
+public User getUser(Long id) {
 
-        try {
-            Optional<User> user = userRepository.findById(id);
-
-            if (user.isPresent()) {
-                return user.get();
-            } else {
-                throw new RuntimeException("User not Found");
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Error fetching user: " + e.getMessage());
-        }
-    }
+    return userRepository.findById(id)
+            .orElseThrow(() ->
+                    new UserNotFoundException(
+                            "User not found with ID: " + id
+                    )
+            );
+}
 
 
     public User updateUser(Long id, User user) {

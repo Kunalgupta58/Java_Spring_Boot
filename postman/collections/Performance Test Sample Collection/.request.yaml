@@ -1,0 +1,8 @@
+$kind: http-request
+name: ""
+url: http://localhost:8080/users/6
+method: GET
+body:
+  type: json
+  content: '{"name":"Kunal","email":"kunal@example.com"}'
+order: 1000
